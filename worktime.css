@@ -1,0 +1,25 @@
+ul.worktime_week {
+    clear:both;
+}
+.worktime_grid li {
+    width:30px;
+    height:30px;
+    list-style: none;
+    float:left;
+    text-align: center;
+    border-right:1px solid #fff;
+    border-bottom:1px solid #fff;
+    font-size:0.75em;
+    line-height:2.75em;
+}
+li.worktime_hours {
+    background: #EDEDED;
+    border-right:1px solid #fff;
+    border-bottom:1px solid #fff;
+}
+li.worktime_hours.holiday{
+    background: #b8b8b8;
+}
+li.worktime_hours:hover,li.worktime_hours.selected {
+    background: #CEDB9C;
+}
