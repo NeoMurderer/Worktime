@@ -366,7 +366,10 @@ Full-Width Styles
 #footer_wrap {
   background: #212121;
 }
-
+#worktime {
+    margin:0 0 20px;
+    overflow: hidden;
+}
 
 
 /*******************************************************************************
