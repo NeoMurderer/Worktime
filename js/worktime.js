@@ -19,6 +19,8 @@ var Worktime = function () {
             week_ul = null,
             week_li = null,
             week_label = $("<ul/>", {"class": "worktime_hours-label"});
+        week_li = $("<li/>", {"class": "worktime_hours-label_text"})
+        week_label.append(week_li)
         for (hours = 1; hours <= 24; hours++) {
             week_li = $("<li/>", {"class": "worktime_hours-label_text", "text": hours})
             week_label.append(week_li)
@@ -106,7 +108,6 @@ Worktime.prototype = {
 
 function mergeRecursive(obj1, obj2) {
     "use strict";
-
     for (var p in obj2) {
         try {
             if (obj2[p].constructor === Object) {
