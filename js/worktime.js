@@ -30,7 +30,7 @@ var Worktime = function () {
             week_ul = $("<ul/>", {"class": "worktime_week", "data-week": week})
             week_li = $("<li/>", {"class": "worktime_week-label",text: self.options.weekTitle[week]});
             week_ul.append(week_li)
-            for (hours = 0; hours < 24; hours++) {
+            for (hours = 1; hours <= 24; hours++) {
                 week_li = $("<li/>", {"class": "worktime_hours", "data-hours": hours, "data-week": week,title:self.options.weekTitleFull[week]+" "+ hours + " hours"}).click(function () {
                     self.toggleSelected(this)
                 })
@@ -64,7 +64,6 @@ var Worktime = function () {
             return false;
         });
         $(self.options.itemSelector).mouseup(function (event) {
-            console.log("mouseup")
             $(self.options.itemSelector).find("li").unbind('mouseenter mouseleave');
             return false;
         });
@@ -83,7 +82,6 @@ var Worktime = function () {
                 $('#worktime ul[data-week=' + newItem.week + '] li').slice(self.options.prevItem.hours, newItem.hours + 1).addClass("selected");
 
             }
-            console.log($('#worktime ul[data-week=' + newItem.week + '] li').slice(newItem.hours, self.options.prevItem.hours))
         }
         else {
             $(element).toggleClass("selected");
@@ -102,6 +100,23 @@ Worktime.prototype = {
 
         var options = parent.options = mergeRecursive(parent.options, settings);
         $(options.itemSelector).append(parent.initGrid());
+    },
+    getValues: function(){
+        "use strict";
+        var parent = this,
+            data = {};
+        $(parent.options.itemSelector).find("ul.worktime_week").each(function(i){
+            if(!$(this).find("li.worktime_hours.selected").length) return;
+            data[parent.options.weekTitleFull[$(this).data("week")]] = [];
+            $(this).find("li.worktime_hours").each(function(i){
+                if($(this).hasClass("selected"))
+                {
+                    data[parent.options.weekTitleFull[$(this).data("week")]].push($(this).data("hours"));
+                }
+
+            });
+        });
+        return data;
     }
 
 }
