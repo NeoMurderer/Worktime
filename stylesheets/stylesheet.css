@@ -79,6 +79,7 @@ h2 {
 
 h3 {
   font-size: 24px;
+    clear:both;
 }
 
 h4 {
@@ -264,7 +265,7 @@ Full-Width Styles
 
 .inner {
   position: relative;
-  max-width: 640px;
+  max-width: 940px;
   padding: 20px 10px;
   margin: 0 auto;
 }
@@ -353,7 +354,7 @@ Full-Width Styles
 }
 
 #main_content_wrap {
-  background: #f2f2f2;
+  background: #fff;
   border-top: 1px solid #111;
   border-bottom: 1px solid #111;
 }
