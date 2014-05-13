@@ -7,12 +7,15 @@ var Worktime = function () {
     var self = this;
     self.options = {
         itemSelector: "#worktime",
+        input: null,
         shiftKey: false,
         prevItem: null,
+        data:null,
         weekTitle:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
         weekTitleFull:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
     }
     self.initGrid = function () {
+        self.options.data = JSON.parse(self.options.data);
         var grid = $("<div/>", {"class": "worktime_grid"}),
             week = 0,
             hours = 0,
@@ -31,11 +34,15 @@ var Worktime = function () {
             week_li = $("<li/>", {"class": "worktime_week-label",text: self.options.weekTitle[week]});
             week_ul.append(week_li)
             for (hours = 1; hours <= 24; hours++) {
+                var selected = (jQuery.inArray(hours, self.options.data[self.options.weekTitleFull[week]]) >-1) ? true : false;
                 week_li = $("<li/>", {"class": "worktime_hours", "data-hours": hours, "data-week": week,title:self.options.weekTitleFull[week]+" "+ hours + " hours"}).click(function () {
                     self.toggleSelected(this)
                 })
                 if(week>4){
                     week_li.addClass("holiday");
+                }
+                if(selected){
+                    week_li.addClass("selected");
                 }
                 week_ul.append(week_li)
             }
@@ -90,6 +97,12 @@ var Worktime = function () {
             hours: $(element).data("hours"),
             week: $(element).data("week")
         }
+        if(self.options.input) {
+            self.changeInput(self.getValues());
+        }
+    }
+    self.changeInput = function(data) {
+        $(self.options.input).val(JSON.stringify(data));
     }
 };
 Worktime.prototype = {

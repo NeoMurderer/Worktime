@@ -2,7 +2,7 @@
 <html>
 <head>
     <title></title>
-    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="js/worktime.js"></script>
     <link rel="stylesheet" href="css/reset.css"/>
     <link rel="stylesheet" href="css/style.css"/>
@@ -10,13 +10,15 @@
 </head>
 <body>
 <div id="worktime"></div>
+<input type="text" id="values">
 <script type="text/javascript">
 
     var worktime = new Worktime();
     worktime.init({
-        itemSelector: "#worktime"
+        itemSelector: "#worktime",
+        data: '{"Wednesday":[6,7,8,9,10,11,12,13],"Thursday":[13,14]}',
+        input:"#values"
     });
-    console.log(worktime.getValues())
 </script>
 </body>
 </html>
