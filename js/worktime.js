@@ -10,12 +10,11 @@ var Worktime = function () {
         input: null,
         shiftKey: false,
         prevItem: null,
-        data:null,
+        data:{},
         weekTitle:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
         weekTitleFull:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
     }
     self.initGrid = function () {
-        self.options.data = JSON.parse(self.options.data);
         var grid = $("<div/>", {"class": "worktime_grid"}),
             week = 0,
             hours = 0,
@@ -72,6 +71,10 @@ var Worktime = function () {
         });
         $(self.options.itemSelector).mouseup(function (event) {
             $(self.options.itemSelector).find("li").unbind('mouseenter mouseleave');
+
+            if(self.options.input) {
+                self.changeInput(self.getValues());
+            }
             return false;
         });
         return grid;
@@ -113,6 +116,9 @@ Worktime.prototype = {
 
         var options = parent.options = mergeRecursive(parent.options, settings);
         $(options.itemSelector).append(parent.initGrid());
+        if(parent.options.input) {
+            parent.changeInput(parent.getValues());
+        }
     },
     getValues: function(){
         "use strict";
