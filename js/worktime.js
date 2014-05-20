@@ -10,11 +10,13 @@ var Worktime = function () {
         input: null,
         shiftKey: false,
         prevItem: null,
-        data:{},
+        data:'{}',
         weekTitle:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
         weekTitleFull:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
     }
     self.initGrid = function () {
+        if(!self.options.data.length) self.options.data = '{}';
+        self.options.data = JSON.parse(self.options.data);
         var grid = $("<div/>", {"class": "worktime_grid"}),
             week = 0,
             hours = 0,
