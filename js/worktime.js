@@ -107,6 +107,7 @@ var Worktime = function () {
         }
     }
     self.changeInput = function(data) {
+        if(!Object.keys(data).length) return;
         $(self.options.input).val(JSON.stringify(data));
     }
 };
