@@ -37,6 +37,7 @@ var Worktime = function () {
             for (hours = 1; hours <= 24; hours++) {
                 var selected = (jQuery.inArray(hours, self.options.data[self.options.weekTitleFull[week]]) >-1) ? true : false;
                 week_li = $("<li/>", {"class": "worktime_hours", "data-hours": hours, "data-week": week,title:self.options.weekTitleFull[week]+" "+ hours + " hours"}).click(function () {
+                    if(self.options.disabled) return;
                     self.toggleSelected(this)
                 })
                 if(week>4){
@@ -64,8 +65,17 @@ var Worktime = function () {
             }
         })
         $(self.options.itemSelector).mousedown(function (event) {
+            if(self.options.disabled) return;
+            var state = $(event.target).hasClass("selected")
             $(self.options.itemSelector).find("li").hover(function (event) {
-                $(event.target).addClass("selected")
+                if(state)
+                {
+                    $(event.target).removeClass("selected")
+                }
+                else {
+                    $(event.target).addClass("selected")
+
+                }
                 return false;
 
             })
@@ -74,7 +84,7 @@ var Worktime = function () {
         $(self.options.itemSelector).mouseup(function (event) {
             $(self.options.itemSelector).find("li").unbind('mouseenter mouseleave');
 
-            if(self.options.input) {
+            if(self.options.input && !self.options.disabled) {
                 self.changeInput(self.getValues());
             }
             return false;
@@ -102,7 +112,7 @@ var Worktime = function () {
             hours: $(element).data("hours"),
             week: $(element).data("week")
         }
-        if(self.options.input) {
+        if(self.options.input && !self.options.disabled) {
             self.changeInput(self.getValues());
         }
     }

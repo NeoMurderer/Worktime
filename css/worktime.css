@@ -20,6 +20,18 @@ li.worktime_hours {
 li.worktime_hours.holiday{
     background: #b8b8b8;
 }
-li.worktime_hours:hover,li.worktime_hours.selected {
+li.worktime_hours:hover,li.worktime_hours.selected:hover {
     background: #CEDB9C;
+}
+li.worktime_hours.selected:hover,li.worktime_hours.holiday.selected:hover {
+    background: #d7e4a2;
+}
+li.worktime_hours.selected {
+    background: #b1bc86;
+}
+li.worktime_hours.holiday.selected{
+    background: #6b7d5d;
+}
+li.worktime_hours.holiday.selected{
+    background: #6b7d5d;
 }
